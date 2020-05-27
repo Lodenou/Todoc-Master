@@ -116,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             public void onChanged(@Nullable List<Task> task2) {
                 tasks.clear();
                 tasks.addAll(task2);
-                adapter.notifyDataSetChanged();
+                updateTasks();
+//                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -154,13 +155,9 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     }
 
     public void doNotShowEmptyScreen() {
+
 //        if(adapter.getItemCount() != 0) {
-//        if (lblNoTasks.getVisibility() == View.VISIBLE)
 //            lblNoTasks.setVisibility(View.INVISIBLE);
-//        else
-//            lblNoTasks.setVisibility(View.VISIBLE);
-//
-//            adapter.notifyDataSetChanged();
 //        }
     }
 
