@@ -27,4 +27,8 @@ public class TaskDataRepository {
 
     // --- UPDATE ---
     public void updateTask(Task task){ mTaskDao.updateTask(task); }
+
+    public LiveData<List<Task>> getTasks() {
+       return mTaskDao.getTasks();
+    }
 }

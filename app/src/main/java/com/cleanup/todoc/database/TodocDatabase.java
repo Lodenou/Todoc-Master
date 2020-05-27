@@ -31,7 +31,7 @@ public abstract class TodocDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TodocDatabase.class, "MyDatabase.db")
-//                            .addCallback(prepopulateDatabase())
+                            .addCallback(prepopulateDatabase())
                             .build();
                 }
             }
@@ -41,20 +41,20 @@ public abstract class TodocDatabase extends RoomDatabase {
 
     // ---
 
-//    private static Callback prepopulateDatabase(){
-//        return new Callback() {
-//
-//            @Override
-//            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-//                super.onCreate(db);
-//
-//                ContentValues contentValues = new ContentValues();
-//                contentValues.put("id", 1);
-//                contentValues.put("username", "Philippe");
-//                contentValues.put("urlPicture", "https://oc-user.imgix.net/users/avatars/15175844164713_frame_523.jpg?auto=compress,format&q=80&h=100&dpr=2");
-//
-//                db.insert("User", OnConflictStrategy.IGNORE, contentValues);
-//            }
-//        };
-//    }
+    private static Callback prepopulateDatabase(){
+        return new Callback() {
+
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("id", 1);
+                contentValues.put("name", "Philippe");
+                contentValues.put("color", 32);
+
+                db.insert("project", OnConflictStrategy.IGNORE, contentValues);
+            }
+        };
+    }
 }

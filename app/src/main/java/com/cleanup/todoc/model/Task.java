@@ -19,7 +19,7 @@ public class Task {
      * The unique identifier of the task
      */
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    private Long id;
 
     /**
      * The unique identifier of the project associated to the task
@@ -47,7 +47,7 @@ public class Task {
      * @param name              the name of the task to set
      * @param creationTimestamp the timestamp when the task has been created to set
      */
-    public Task(long id, long projectId, @NonNull String name, long creationTimestamp) {
+    public Task(Long id, long projectId, @NonNull String name, long creationTimestamp) {
         this.setId(id);
         this.setProjectId(projectId);
         this.setName(name);
@@ -59,7 +59,7 @@ public class Task {
      *
      * @return the unique identifier of the task
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -68,8 +68,12 @@ public class Task {
      *
      * @param id the unique idenifier of the task to set
      */
-    private void setId(long id) {
+    private void setId(Long id) {
         this.id = id;
+    }
+
+    public long getProjectId() {
+        return projectId;
     }
 
     /**
@@ -77,6 +81,8 @@ public class Task {
      *
      * @param projectId the unique identifier of the project associated to the task to set
      */
+
+
     private void setProjectId(long projectId) {
         this.projectId = projectId;
     }
@@ -117,6 +123,10 @@ public class Task {
      */
     private void setCreationTimestamp(long creationTimestamp) {
         this.creationTimestamp = creationTimestamp;
+    }
+
+    public long getCreationTimestamp() {
+        return creationTimestamp;
     }
 
     /**

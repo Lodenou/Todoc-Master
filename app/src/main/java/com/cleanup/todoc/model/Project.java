@@ -12,7 +12,7 @@ import android.support.annotation.VisibleForTesting;
  *
  * @author Gaëtan HERFRAY
  */
-@Entity
+@Entity(tableName = "project")
 public class Project {
     /**
      * The unique identifier of the project

@@ -18,6 +18,7 @@ public class TaskViewModel extends ViewModel {
     private final TaskDataRepository taskDataSource;
     private final ProjectDataRepository projectDataSource;
     private final Executor executor;
+    private  LiveData<List<Task>> tasks;
 
     // DATA
     @Nullable
@@ -35,10 +36,15 @@ public class TaskViewModel extends ViewModel {
             return;
         }
         currentProject = projectDataSource.getProject(userId);
+        tasks = taskDataSource.getTasks();
+    }
+
+    public LiveData<List<Task>> getTasks() {
+        return tasks;
     }
 
     // FOR PROJECT
-    public LiveData<Project> getUser(long userId) {
+    public LiveData<Project> getProject(long projectId) {
         return this.currentProject;
     }
 
@@ -59,7 +65,7 @@ public class TaskViewModel extends ViewModel {
         });
     }
 
-    public void updateItem(Task task) {
+    public void updateTask(Task task) {
         executor.execute(() -> {
             taskDataSource.updateTask(task);
         });
