@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 //        this.profileText.setText(project.getProjectname());
 //        Glide.with(this).load(user.getUrlPicture()).apply(RequestOptions.circleCropTransform()).into(this.profileImage);
     } 
-
+ 
     // 6 - Update the list of items
     private void updateTasksList(List<Task> tasks){
         this.adapter.updateData(tasks);
