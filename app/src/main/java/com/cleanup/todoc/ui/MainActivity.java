@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * @param dialogInterface the current displayed dialog
      */
     private void onPositiveButtonClick(DialogInterface dialogInterface) {
+        
         // If dialog is open
         if (dialogEditText != null && dialogSpinner != null) {
             // Get the name of the task
