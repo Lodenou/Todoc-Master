@@ -207,14 +207,13 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     private void updateTasksList(List<Task> tasks){
         this.adapter.updateData(tasks);
     }
-
     /**
      * Called when the user clicks on the positive button of the Create Task Dialog.
      *
      * @param dialogInterface the current displayed dialog
      */
     private void onPositiveButtonClick(DialogInterface dialogInterface) {
-        
+
         // If dialog is open
         if (dialogEditText != null && dialogSpinner != null) {
             // Get the name of the task
