@@ -96,16 +96,14 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         listTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listTasks.setAdapter(adapter);
 
-        doNotShowEmptyScreen();
-
         findViewById(R.id.fab_add_task).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAddTaskDialog();
             }
         });
-        // 8 - Configure RecyclerView & ViewModel
-//        this.configureRecyclerView();
+        //  Configure ViewModel
+
         this.configureViewModel();
 
         // 9 - Get current project & tasks from Database
@@ -153,14 +151,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 ////        updateTasks();
         this.taskViewModel.deleteTask(task.getId());
     }
-
-    public void doNotShowEmptyScreen() {
-
-//        if(adapter.getItemCount() != 0) {
-//            lblNoTasks.setVisibility(View.INVISIBLE);
-//        }
-    }
-
     // -------------------
     // DATA
     // -------------------
@@ -171,17 +161,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         this.taskViewModel = ViewModelProviders.of(this, mViewModelFactory).get(TaskViewModel.class);
         this.taskViewModel.init(PROJECT_ID);
     }
-
-    // ---
-
-    //FIXME ne reconnait pas getProject de ProjectDao
     //3 - Get Current Project
     private void getCurrentProject(int projectId){
         this.taskViewModel.getProject(projectId).observe(this, this::updateHeader);
     }
-
-    // ---
-
     // 3 - Get all items for a user
     private void getTasks(int projectId){
         this.taskViewModel.getTasks(projectId).observe(this, this::updateTasksList);
@@ -209,11 +192,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
     // 4 - Configure RecyclerView
     private void configureRecyclerView(){
-//       this.adapter = new TasksAdapter( tasks, this);
         this.listTasks.setAdapter(this.adapter);
         this.listTasks.setLayoutManager(new LinearLayoutManager(this));
-//        ItemClickSupport.addTo(listTasks, R.layout.activity_todo_list_item)
-//                .setOnItemClickListener((recyclerView1, position, v) -> this.updateItem(this.adapter.getItem(position)));
     }
 
     // 5 - Update header (username & picture)
@@ -262,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
                         new Date().getTime()
                 );
 
+                // addTask has been changed to create new task in the db
                 addTask(task);
 
                 dialogInterface.dismiss();
