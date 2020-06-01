@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 
 import java.util.Comparator;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 /**
  * <p>Model for the tasks of the application.</p>
  *
