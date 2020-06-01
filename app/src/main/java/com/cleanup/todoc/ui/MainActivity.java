@@ -170,31 +170,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         this.taskViewModel.getTasks(projectId).observe(this, this::updateTasksList);
     }
 
-////     3 - Create a new task
-//    private void createTask(){
-//        Task task = new Task(this.editText.getText().toString(), this.spinner.getSelectedItemPosition(), PROJECT_ID);
-//        this.editText.setText("");
-//        this.taskViewModel.createTask(task);
-//    }
-
- //    3 - Delete an item
-//    private void deleteTask(Task task){
-//        this.taskViewModel.deleteTask(task.getId());
-//    }
-
-    // 3 - Update an item (selected or not)
-//    private void updateTask(Task task){
-//        task.setSelected(!task.getSelected());
-//        this.itemViewModel.updateItem(item);
-//    }
-
     // UI
-
-    // 4 - Configure RecyclerView
-    private void configureRecyclerView(){
-        this.listTasks.setAdapter(this.adapter);
-        this.listTasks.setLayoutManager(new LinearLayoutManager(this));
-    }
 
     // 5 - Update header (username & picture)
     private void updateHeader(Project project){
@@ -231,11 +207,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             // If both project and name of the task have been set
             else if (taskProject != null) {
                 // TODO: Replace this by id of persisted task
-//                long id = (long) (Math.random() * 50000);
                 Long id = null;
 
                 Task task = new Task(
-                        id,
+
                         taskProject.getId(),
                         taskName,
                         new Date().getTime()
