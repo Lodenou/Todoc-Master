@@ -28,5 +28,11 @@
                 app:showAsAction="never|withText" />
         </menu>
     </item>
+    <item
+        android:id="@+id/refresh_button"
+        android:title ="refresh"
+        android:icon="@drawable/ic_add"
+        app:showAsAction="ifRoom">
 
+    </item>
 </menu>
