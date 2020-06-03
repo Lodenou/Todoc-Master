@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             }
         });
         //  Configure ViewModel
-        Log.d("main", "onCreate");
         this.configureViewModel();
 
         // 9 - Get current project & tasks from Database
@@ -138,10 +137,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.refresh_button){
-            Injection.provideTaskDataSource(getApplicationContext());
-        }
-
         if (id == R.id.filter_alphabetical) {
             sortMethod = SortMethod.ALPHABETICAL;
         } else if (id == R.id.filter_alphabetical_inverted) {
@@ -161,16 +156,9 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
     @Override
     public void onDeleteTask(Task task) {
-//        tasks.remove(task);
 //        updateTasks();
         taskViewModel.deleteTask(task.getId());
         updateTasksList(tasks);
-        if (adapter.getItemCount() == 0) {
-            Log.d("main", "onDeleteTask: ");
-            refresh();
-        }
-
-
     }
     // -------------------
     // DATA
@@ -195,12 +183,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
     // 5 - Update header (username & picture)
     private void updateHeader(Project project){
-        Log.d("","");
     }
  
     // 6 - Update the list of items
     private void updateTasksList(List<Task> tasks){
-//        this.adapter.updateData(tasks);
         adapter.updateTasks(tasks);
     }
     /**
@@ -272,69 +258,18 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         taskViewModel.createTask(task);
         tasks.add(task);
 
-        if(task.getProjectId() == 1)
-        {
-            PROJECT_ID = 1;
-        }
-        if(task.getProjectId() == 2) {
-            PROJECT_ID = 2;
-        }
-        if (task.getProjectId() == 3) {
-            PROJECT_ID = 3;
-        }
+//        if(task.getProjectId() == 1)
+//        {
+//            PROJECT_ID = 1;
+//        }
+//        if(task.getProjectId() == 2) {
+//            PROJECT_ID = 2;
+//        }
+//        if (task.getProjectId() == 3) {
+//            PROJECT_ID = 3;
+//        }
         adapter.updateTasks(tasks);
-        if(adapter.getItemCount() == 0) {
-            Log.d("main", "addTask: adapter == 0 ");
-            Injection.provideTaskDataSource(getApplicationContext());
-        }
-//        taskViewModel.updateTask(task);
-//        updateTasks();
-//        refresh();
     }
-
-    public void refresh(){
-        Intent i = new Intent(MainActivity.this, MainActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    public void onDestroy() {
-        Log.d("main", "onDestroy");
-        super.onDestroy();
-    }
-    @Override
-    protected void onRestart() {
-        Log.d("main", "onRestart");
-        super.onRestart();
-    }
-
-    @Override
-    protected void onStop() {
-
-        Log.d("main", "onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onResume() {
-
-        Log.d("main", "onResume");
-        super.onResume();
-    }
-
-    @Override
-    protected void onStart() {
-
-        Log.d("main", "onStart");
-        super.onStart();
-    }
-
-    @Override
-    protected void onPause() {
-        Log.d("main", "onPause");
-        super.onPause();
-    }
-
     /**
      * Updates the list of tasks in the UI
      */
