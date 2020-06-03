@@ -48,9 +48,9 @@ public class TaskDaoTest {
     private  long PROJECT_ID = 1;
     private Project PROJECT_DEMO = new Project(PROJECT_ID, "Projet Tartampion", 0xFFEADAD1);
     //FIXME LE LONG creationTimestamp est bricolé + changer les textes
-    final Task NEW_TASK_0 = new Task((long) 1, 1L, "task 1", new Date().getTime());
-    final Task NEW_TASK_1 = new Task((long) 2, 2L, "task 2", new Date().getTime());
-    final Task NEW_TASK_2 = new Task((long) 3, 3L, "task 3", new Date().getTime());
+    final Task NEW_TASK_0 = new Task( 1, "task 1", new Date().getTime());
+    final Task NEW_TASK_1 = new Task( 1, "task 2", new Date().getTime());
+    final Task NEW_TASK_2 = new Task( 1, "task 3", new Date().getTime());
 
 
 
@@ -79,8 +79,9 @@ public class TaskDaoTest {
         this.database.taskDao().insertTask(NEW_TASK_1);
         this.database.taskDao().insertTask(NEW_TASK_2);
 
+
         // TEST
-        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDao().getTask(PROJECT_ID));
+        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDao().getTasks());
         assertTrue(tasks.size() == 3);
     }
 
@@ -90,19 +91,18 @@ public class TaskDaoTest {
         this.database.projectDao().createProject(PROJECT_DEMO);
         this.database.taskDao().insertTask(NEW_TASK_0);
         Task taskAdded = LiveDataTestUtil.getValue(this.database.taskDao().getTask(PROJECT_ID)).get(0);
-//        taskAdded.setSelected(true);
         this.database.taskDao().updateTask(taskAdded);
 
 //        //TEST
-//        List<Item> items = LiveDataTestUtil.getValue(this.database.itemDao().getItems(USER_ID));
-//        assertTrue(items.size() == 1 && items.get(0).getSelected());
+        List<Task> tasks = LiveDataTestUtil.getValue(this.database.taskDao().getTask(PROJECT_ID));
+        assertTrue(tasks.size() == 1 );
     }
 
     @Test
     public void insertAndDeleteTask() throws InterruptedException {
         // BEFORE : Adding demo user & demo item. Next, get the item added & delete it.
         this.database.projectDao().createProject(PROJECT_DEMO);
-//        this.database.taskDao().insertTask(NEW_TASK_0);
+        this.database.taskDao().insertTask(NEW_TASK_0);
         Task taskAdded = LiveDataTestUtil.getValue(this.database.taskDao().getTask(PROJECT_ID)).get(0);
         this.database.taskDao().deleteTask(taskAdded.getId());
 
