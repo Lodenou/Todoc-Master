@@ -70,11 +70,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
         return tasks.size();
     }
 
-    public void updateData(List<Task> tasks){
-        this.tasks = tasks;
-        this.notifyDataSetChanged();
-    }
-
     /**
      * Listener for deleting tasks
      */

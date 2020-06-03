@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
         // 9 - Get current project & tasks from Database
         this.getCurrentProject(PROJECT_ID);
-        this.getTasks(PROJECT_ID);
+        this.getTasks();
         this.taskViewModel.getTasks().observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> task2) {
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 //        tasks.remove(task);
 //        updateTasks();
         taskViewModel.deleteTask(task.getId());
-        Injection.provideTaskDataSource(getApplicationContext());
+        updateTasksList(tasks);
         if (adapter.getItemCount() == 0) {
             Log.d("main", "onDeleteTask: ");
             refresh();
@@ -187,8 +187,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         this.taskViewModel.getProject(projectId).observe(this, this::updateHeader);
     }
     // 3 - Get all items for a user
-    private void getTasks(long projectId){
-        this.taskViewModel.getTasks(projectId).observe(this, this::updateTasksList);
+    private void getTasks(){
+        this.taskViewModel.getTasks().observe(this, this::updateTasksList);
     }
 
     // UI
@@ -196,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     // 5 - Update header (username & picture)
     private void updateHeader(Project project){
         Log.d("","");
-//        this.profileText.setText(project.getProjectname());
     }
  
     // 6 - Update the list of items
@@ -272,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     private void addTask(@NonNull Task task) {
         taskViewModel.createTask(task);
         tasks.add(task);
+
         if(task.getProjectId() == 1)
         {
             PROJECT_ID = 1;
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         if (task.getProjectId() == 3) {
             PROJECT_ID = 3;
         }
-        adapter.notifyDataSetChanged();
+        adapter.updateTasks(tasks);
         if(adapter.getItemCount() == 0) {
             Log.d("main", "addTask: adapter == 0 ");
             Injection.provideTaskDataSource(getApplicationContext());
