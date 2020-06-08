@@ -47,7 +47,6 @@ public class TaskDaoTest {
     private Project mProject;
     private  long PROJECT_ID = 1;
     private Project PROJECT_DEMO = new Project(PROJECT_ID, "Projet Tartampion", 0xFFEADAD1);
-    //FIXME LE LONG creationTimestamp est bricolé + changer les textes
     final Task NEW_TASK_0 = new Task( 1, "task 1", new Date().getTime());
     final Task NEW_TASK_1 = new Task( 1, "task 2", new Date().getTime());
     final Task NEW_TASK_2 = new Task( 1, "task 3", new Date().getTime());
